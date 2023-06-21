@@ -1,4 +1,4 @@
-//! Blocks are a series of components that can be combined to create visually rich and compellingly interactive messages.    
+//! Blocks are a series of components that can be combined to create visually rich and compellingly interactive messages.
 
 use crate::block::block_actions::ActionBlock;
 use crate::block::block_context::ContextBlock;
@@ -33,6 +33,8 @@ pub enum Block {
     InputBlock(InputBlock),
     #[serde(rename = "section")]
     SectionBlock(SectionBlock),
+    #[serde(rename = "rich_text")]
+    RichTextBlock,
     #[serde(skip)]
     None,
 }
@@ -48,6 +50,7 @@ impl Block {
             Block::ImageBlock(ImageBlock { .. }) => BlockType::Image,
             Block::InputBlock(InputBlock { .. }) => BlockType::Input,
             Block::SectionBlock(SectionBlock { .. }) => BlockType::Section,
+            Block::RichTextBlock => BlockType::None,
             Block::None => BlockType::None,
         }
     }
@@ -70,6 +73,8 @@ pub enum BlockType {
     Image,
     Input,
     Section,
+    #[serde(skip)]
+    RichText,
     #[serde(skip)]
     None,
 }
